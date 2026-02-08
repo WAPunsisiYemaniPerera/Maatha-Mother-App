@@ -35,6 +35,8 @@ dependencies:
   cloudinary_public: 0.23.1
   http: ^1.1.0
 
+  firebase_messaging: ^15.2.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

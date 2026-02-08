@@ -62,12 +62,16 @@ class HomeScreen extends StatelessWidget {
           String midwife = d['assignedMidwife'] ?? "Mrs. Priyanka Perera";
           String riskStatus = d['riskStatus'] ?? "Normal";
           String? emergencyPhone = d['emergencyContact'];
-          
-          // Database එකේ ඇති Avatar එක ලබා ගැනීම (නැත්නම් default එකක් පෙන්වීම)
           String profilePic = d['profilePic'] ?? 'assets/avatars/avatar1.png';
 
           DateTime lmpDate = (d['lmp'] as Timestamp).toDate();
           DateTime eddDate = (d['edd'] as Timestamp).toDate();
+          
+          // සායන දිනය ලබා ගැනීම
+          DateTime? nextClinic = d['nextClinicDate'] != null 
+              ? (d['nextClinicDate'] as Timestamp).toDate() 
+              : null;
+
           int weeks = DateTime.now().difference(lmpDate).inDays ~/ 7;
           int days = DateTime.now().difference(lmpDate).inDays % 7;
           int daysToEdd = eddDate.difference(DateTime.now()).inDays;
@@ -76,10 +80,11 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                // මෙහිදී Header එකට profilePic එක ලබා දී ඇත
                 _buildHeader(fullName, profilePic),
                 
-                // Glowing Animated SOS Button
+                // --- සායන මතක් කිරීමේ Card එක මෙතැනට එක් කර ඇත ---
+                if (nextClinic != null) _buildClinicReminder(nextClinic),
+                
                 _GlowingSOSButton(
                   midwife: midwife,
                   emergencyPhone: emergencyPhone,
@@ -103,7 +108,64 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // --- Profile Photo එක පෙන්වන ලෙස යාවත්කාලීන කළ Header ---
+  // --- සායන මතක් කිරීමේ Card එක ---
+  Widget _buildClinicReminder(DateTime nextClinicDate) {
+    final now = DateTime.now();
+    final difference = nextClinicDate.difference(now).inDays;
+    bool isUrgent = difference <= 2 && difference >= 0;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: isUrgent ? Colors.red.shade50 : Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(25),
+        border: Border.all(
+          color: isUrgent ? Colors.red.shade200 : Colors.blue.shade200, 
+          width: 2
+        ),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            isUrgent ? Icons.notification_important_rounded : Icons.calendar_today_rounded,
+            color: isUrgent ? Colors.red : Colors.blue.shade700,
+            size: 35,
+          ),
+          const SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  isUrgent ? "අවධානය යොමු කරන්න!" : "මීළඟ සායන දිනය",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: isUrgent ? Colors.red.shade900 : Colors.blue.shade900,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "දිනය: ${nextClinicDate.year}-${nextClinicDate.month}-${nextClinicDate.day}",
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Colors.black87),
+                ),
+                if (isUrgent)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 4),
+                    child: Text(
+                      "ඔබේ සායනය ඉතා ළඟයි!",
+                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.red),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildHeader(String name, String avatarPath) {
     return Padding(
       padding: const EdgeInsets.only(top: 40, bottom: 20),
@@ -267,7 +329,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// --- දිලිසෙන (Glow) SOS බොත්තම සඳහා වන Widget එක ---
 class _GlowingSOSButton extends StatefulWidget {
   final String midwife;
   final String? emergencyPhone;
