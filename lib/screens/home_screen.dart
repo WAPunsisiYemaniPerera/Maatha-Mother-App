@@ -7,48 +7,32 @@ import '../services/sos_service.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  // --- සති ගණන අනුව Emoji සහ විස්තර ලබා ගැනීමේ Logic එක ---
+  // --- Baby Growth Logic ---
   Map<String, String> getBabyGrowthInfo(int week) {
-    if (week <= 4) return {
-      "fruit": "බීජයක් / Tiny Seed", 
-      "emoji": "🌱", 
-      "desc": "දරුවා දැන් කුඩා බීජයක් මෙන් වේ. අනාගතයේ ලොකු ගසක් වීමට පදනම වැටේ.\nBaby is like a tiny seed."
-    };
-    if (week <= 8) return {
-      "fruit": "මුද්‍රප්පලම් / Raspberry", 
-      "emoji": "🍇", 
-      "desc": "දරුවා මුද්‍රප්පලම් ගෙඩියක් තරම් වේ. දැන් හෘද ස්පන්දනය ඇරඹී ඇත.\nBaby is the size of a raspberry."
-    };
-    if (week <= 12) return {
-      "fruit": "දෙහි ගෙඩියක් / Lime", 
-      "emoji": "🍋", 
-      "desc": "දරුවා දැන් දෙහි ගෙඩියක් තරම් වේ. දරුවාගේ මුහුණේ අවයව සෑදී ඇත.\nBaby is the size of a lime."
-    };
-    if (week <= 24) return {
-      "fruit": "පැපොල් ගෙඩියක් / Papaya", 
-      "emoji": "🥭", 
-      "desc": "දරුවා දැන් පැපොල් ගෙඩියක් තරම් වේ. ඇස් ඇරීමට හා පියවීමට හැකිය.\nBaby is the size of a papaya."
-    };
-    return {
-      "fruit": "පුංචි බබෙක් / Fully Formed Baby", 
-      "emoji": "👶", 
-      "desc": "දරුවා දැන් මෙලොවට ඒමට සූදානම්! ඔබ සැමට සුබ ගමන්!\nBaby is now ready to meet the world!"
-    };
+    if (week <= 4) return {"fruit": "බීජයක් / Tiny Seed", "emoji": "🌱", "desc": "දරුවා දැන් කුඩා බීජයක් මෙන් වේ."};
+    if (week <= 8) return {"fruit": "මුද්‍රප්පලම් / Raspberry", "emoji": "🍇", "desc": "දරුවා මුද්‍රප්පලම් ගෙඩියක් තරම් වේ."};
+    if (week <= 12) return {"fruit": "දෙහි ගෙඩියක් / Lime", "emoji": "🍋", "desc": "දරුවා දැන් දෙහි ගෙඩියක් තරම් වේ."};
+    if (week <= 24) return {"fruit": "පැපොල් ගෙඩියක් / Papaya", "emoji": "🥭", "desc": "දරුවා දැන් පැපොල් ගෙඩියක් තරම් වේ."};
+    return {"fruit": "පුංචි බබෙක් / Fully Formed Baby", "emoji": "👶", "desc": "දරුවා දැන් මෙලොවට ඒමට සූදානම්!"};
   }
 
-  // --- දිනපතා වෙනස් වන සෞඛ්‍ය උපදෙස් ---
+  // --- Daily Tips ---
   String getDailyTip() {
     int day = DateTime.now().weekday;
     List<String> tips = [
-      "අද ප්‍රමාණවත් තරම් ජලය පානය කළාද? (Drink enough water)",
-      "ගුණදායක පලතුරු ආහාරයට එක් කරගන්න. (Eat fresh fruits)",
-      "මද වේලාවක් ඇවිදීම ඔබට සුවදායක වේවි. (Go for a small walk)",
-      "අද දින විටමින් පෙති ලබාගැනීමට අමතක නොකරන්න. (Take your vitamins)",
-      "ප්‍රමාණවත් තරම් විවේකයක් ලබාගන්න. (Get plenty of rest)",
-      "මනස සන්සුන්ව තබා ගැනීමට සංගීතයට සවන් දෙන්න. (Listen to calm music)",
-      "දරුවා සමඟ කතා කරන්න, ඔහු ඔබට සවන් දෙනවා. (Talk to your baby)"
+      "අද ඇති වෙන්න වතුර බිව්වද? පොඩ්ඩක් මතක් කරලා බලන්න.\nDid you drink enough water today? Just a quick reminder.",
+      "දැන් පොඩ්ඩක් මහන්සි ඇති. විනාඩි දහයක්වත් ඇස් දෙක පියාගෙන ඉන්න.\nYou might be feeling tired. Try to rest for at least ten minutes.",
+      "පොඩ්ඩක් එළියට ගිහින් ඇවිදලා එමුද? හිතටත් ලොකු නිදහසක් දැනේවි.\nHow about a short walk outside? It will make you feel much better.",
+      "අද විටමින් ටික ගත්තද? අමතක වුණා නම් දැන්ම ගන්න.\nDid you take your vitamins today? If not, now is a good time.",
+      "බඩගිනි වුණාම කන්න මොනවා හරි පලතුරක් ළඟින් තියාගන්න.\nKeep some fruit nearby to snack on whenever you feel hungry.",
+      "ඔයාටයි බබාලාටයි දෙන්නටම ගුණ කෑමක් අද වේලට එකතු කරගමු.\nLet’s add something healthy to your meal for both you and the baby.",
+      "හොඳට නිදාගන්න. ඔයාගේ ශරීරයට දැන් ඒ විවේකය ගොඩක් ඕනේ.\nGet some good sleep. Your body really needs the rest right now.",
+      "දැන් බබාට ඔයා කියන දේවල් ඇහෙනවා. ඉතින් පොඩ්ඩක් එයා එක්ක කතා කරන්න.\nThe baby can hear you now. Go ahead and have a little chat with them.",
+      "හිතට වද දෙන ප්‍රශ්න අමතක කරලා, ලස්සන සින්දුවක් අහන්න.\nForget your worries for a moment and listen to some relaxing music.",
+      "අද ඔයාට කොහොමද? හිතට දැනෙන දේ අපිත් එක්ක බෙදාගන්න.\nHow are you feeling today? Feel free to share what’s on your mind.",
+      "ඔයා අද හරිම ලස්සනයි. ඒ හිනාව දිගටම තියාගන්න.\nYou look beautiful today. Keep that smile glowing."
     ];
-    return tips[day - 1];
+    return tips[day % tips.length];
   }
 
   @override
@@ -72,33 +56,42 @@ class HomeScreen extends StatelessWidget {
             return const Center(child: Text("දත්ත සොයාගත නොහැක / Data Not Found"));
           }
 
-          var d = snapshot.data!.docs.first.data() as Map<String, dynamic>;
+          var doc = snapshot.data!.docs.first;
+          var d = doc.data() as Map<String, dynamic>;
           String fullName = d['fullName'] ?? "Mother";
           String midwife = d['assignedMidwife'] ?? "Mrs. Priyanka Perera";
           String riskStatus = d['riskStatus'] ?? "Normal";
-          String? emergencyContact = d['phone'];
+          String? emergencyPhone = d['emergencyContact'];
+          
+          // Database එකේ ඇති Avatar එක ලබා ගැනීම (නැත්නම් default එකක් පෙන්වීම)
+          String profilePic = d['profilePic'] ?? 'assets/avatars/avatar1.png';
 
           DateTime lmpDate = (d['lmp'] as Timestamp).toDate();
           DateTime eddDate = (d['edd'] as Timestamp).toDate();
-          int totalDays = DateTime.now().difference(lmpDate).inDays;
-          int weeks = totalDays ~/ 7;
-          int days = totalDays % 7;
+          int weeks = DateTime.now().difference(lmpDate).inDays ~/ 7;
+          int days = DateTime.now().difference(lmpDate).inDays % 7;
           int daysToEdd = eddDate.difference(DateTime.now()).inDays;
-
-          var growthInfo = getBabyGrowthInfo(weeks);
 
           return SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                _buildHeader(fullName),
-                _buildEmergencySOS(context, midwife, emergencyContact),
+                // මෙහිදී Header එකට profilePic එක ලබා දී ඇත
+                _buildHeader(fullName, profilePic),
+                
+                // Glowing Animated SOS Button
+                _GlowingSOSButton(
+                  midwife: midwife,
+                  emergencyPhone: emergencyPhone,
+                  docId: doc.id,
+                  onSetContact: (context, docId, phone) => _showSetContactDialog(context, docId, phone),
+                ),
                 const SizedBox(height: 20),
                 _buildProgressCard(weeks, days, daysToEdd),
                 _buildSectionTitle("Daily Health Tip | අද දවසේ උපදෙස්"),
                 _buildDailyTipCard(),
                 _buildSectionTitle("Baby's Growth | දරුවාගේ වර්ධනය"),
-                _buildBabyGrowthCard(weeks, growthInfo),
+                _buildBabyGrowthCard(weeks, getBabyGrowthInfo(weeks)),
                 _buildSectionTitle("Health Status | සෞඛ්‍ය තත්ත්වය"),
                 _buildRiskStatus(riskStatus),
                 const SizedBox(height: 100),
@@ -110,113 +103,85 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // --- SOS Button (Emphasized) ---
-  Widget _buildEmergencySOS(BuildContext context, String midwife, String? contact) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.red.shade50,
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: Colors.redAccent.withOpacity(0.5), width: 2),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(25),
-          onLongPress: () async {
-            await SOSService().triggerSOS(midwife, contact);
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("හදිසි පණිවිඩය සහ ඇමතුම යොමු කළා!")),
-            );
-          },
-          child: const Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Icon(Icons.emergency_share, color: Colors.red, size: 45),
-                SizedBox(height: 10),
-                Text("EMERGENCY SOS", style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold)),
-                Text(
-                  "හදිසි අවස්ථාවකදී තද කර අල්ලාගෙන සිටින්න\n(Call Midwife & Emergency Number)",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.red, fontSize: 11, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  // --- Baby Growth Card with Animated Emoji ---
-  Widget _buildBabyGrowthCard(int week, Map<String, String> info) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.85),
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [BoxShadow(color: Colors.blue.withOpacity(0.05), blurRadius: 10)],
-      ),
-      child: Row(
-        children: [
-          // Emoji එකක් භාවිතා කිරීම (Cute Animation effect එකක් සමඟ)
-          TweenAnimationBuilder(
-            tween: Tween<double>(begin: 0.8, end: 1.1),
-            duration: const Duration(seconds: 1),
-            builder: (context, double value, child) {
-              return Transform.scale(
-                scale: value,
-                child: Text(info['emoji']!, style: const TextStyle(fontSize: 60)),
-              );
-            },
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("සතිය $week - ${info['fruit']}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1565C0))),
-                const SizedBox(height: 5),
-                Text(info['desc']!, style: const TextStyle(fontSize: 13, color: Colors.black87)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // --- Daily Tip Card ---
-  Widget _buildDailyTipCard() {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [Colors.lightBlue.shade100, Colors.white]),
-        borderRadius: BorderRadius.circular(25),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.lightbulb_outline, color: Colors.orangeAccent, size: 35),
-          const SizedBox(width: 15),
-          Expanded(child: Text(getDailyTip(), style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black54))),
-        ],
-      ),
-    );
-  }
-
-  // --- Header, Progress, Risk Widgets (වෙනස් කර නැත) ---
-  Widget _buildHeader(String name) {
+  // --- Profile Photo එක පෙන්වන ලෙස යාවත්කාලීන කළ Header ---
+  Widget _buildHeader(String name, String avatarPath) {
     return Padding(
       padding: const EdgeInsets.only(top: 40, bottom: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text("ආයුබෝවන්, ${name.split(' ').first}", style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Color(0xFF1565C0))),
-            const Text("නිරෝගී දවසක්! 🌸", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
-          ]),
-          const CircleAvatar(backgroundColor: Color(0xFFF06292), radius: 25, child: Icon(Icons.person, color: Colors.white)),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "ආයුබෝවන්, ${name.split(' ').first}",
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: Color(0xFF1565C0)),
+              ),
+              const Text("නිරෝගී දවසක්! 🌸", style: TextStyle(color: Colors.black54, fontWeight: FontWeight.bold)),
+            ],
+          ),
+          Container(
+            padding: const EdgeInsets.all(3),
+            decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+            child: CircleAvatar(
+              radius: 28,
+              backgroundColor: const Color(0xFFE3F2FD),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.asset(avatarPath, fit: BoxFit.cover),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showSetContactDialog(BuildContext context, String docId, String? currentPhone) {
+    TextEditingController controller = TextEditingController(text: currentPhone);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white.withOpacity(0.95),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        title: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(color: Colors.blue.shade50, shape: BoxShape.circle),
+              child: const Icon(Icons.contact_phone_rounded, color: Colors.blueAccent, size: 40),
+            ),
+            const SizedBox(height: 15),
+            const Text("හදිසි ඇමතුම් අංකය", style: TextStyle(fontWeight: FontWeight.w900, color: Color(0xFF1565C0), fontSize: 18)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text("හදිසි අවස්ථාවකදී ඇමතුමක් ලබා ගැනීමට ඔබගේ පවුලේ අයෙකුගේ අංකයක් මෙහි ඇතුළත් කරන්න.", textAlign: TextAlign.center, style: TextStyle(fontSize: 13, color: Colors.black54)),
+            const SizedBox(height: 20),
+            TextField(
+              controller: controller,
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.grey.shade100,
+                labelText: "Phone Number",
+                prefixIcon: const Icon(Icons.phone_android_rounded),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(context), child: const Text("අවලංගුයි")),
+          ElevatedButton(
+            onPressed: () async {
+              await FirebaseFirestore.instance.collection('mothers').doc(docId).update({'emergencyContact': controller.text});
+              if (context.mounted) Navigator.pop(context);
+            },
+            child: const Text("සුරකින්න"),
+          ),
         ],
       ),
     );
@@ -226,18 +191,15 @@ class HomeScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(25),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFFF06292), Color(0xFFE91E63)]),
-        borderRadius: BorderRadius.circular(30),
-      ),
+      decoration: BoxDecoration(gradient: const LinearGradient(colors: [Color(0xFFF06292), Color(0xFFE91E63)]), borderRadius: BorderRadius.circular(30)),
       child: Column(
         children: [
-          const Text("ගැබ් කාලය / Progress", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+          const Text("ඔබේ ගැබ් කාලය / Pregnancy Progress", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
           const SizedBox(height: 15),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            _timeBox(weeks, "සති"),
+            _timeBox(weeks, "සති / WEEKS"),
             const SizedBox(width: 30),
-            _timeBox(days, "දින"),
+            _timeBox(days, "දින / DAYS"),
           ]),
           const Divider(color: Colors.white24, height: 30),
           Text("ප්‍රසූතියට තව දින $daysToEdd කි / Days left: $daysToEdd", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
@@ -251,6 +213,40 @@ class HomeScreen extends StatelessWidget {
       Text("$val", style: const TextStyle(color: Colors.white, fontSize: 45, fontWeight: FontWeight.w900)),
       Text(unit, style: const TextStyle(color: Colors.white70, fontSize: 14)),
     ]);
+  }
+
+  Widget _buildBabyGrowthCard(int week, Map<String, String> info) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(color: Colors.white.withOpacity(0.85), borderRadius: BorderRadius.circular(25)),
+      child: Row(
+        children: [
+          Text(info['emoji']!, style: const TextStyle(fontSize: 50)),
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("සතිය $week - ${info['fruit']}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1565C0))),
+                Text(info['desc']!, style: const TextStyle(fontSize: 13, color: Colors.black87)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDailyTipCard() {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.lightBlue.shade50.withOpacity(0.7), Colors.white.withOpacity(0.9)]), borderRadius: BorderRadius.circular(25)),
+      child: Row(children: [
+        const Icon(Icons.auto_awesome_rounded, color: Colors.orangeAccent, size: 28),
+        const SizedBox(width: 15),
+        Expanded(child: Text(getDailyTip(), style: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black87, height: 1.6))),
+      ]),
+    );
   }
 
   Widget _buildRiskStatus(String status) {
@@ -268,5 +264,108 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildSectionTitle(String title) {
     return Padding(padding: const EdgeInsets.symmetric(vertical: 15), child: Align(alignment: Alignment.centerLeft, child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black45))));
+  }
+}
+
+// --- දිලිසෙන (Glow) SOS බොත්තම සඳහා වන Widget එක ---
+class _GlowingSOSButton extends StatefulWidget {
+  final String midwife;
+  final String? emergencyPhone;
+  final String docId;
+  final Function(BuildContext, String, String?) onSetContact;
+
+  const _GlowingSOSButton({
+    required this.midwife,
+    required this.emergencyPhone,
+    required this.docId,
+    required this.onSetContact,
+  });
+
+  @override
+  State<_GlowingSOSButton> createState() => _GlowingSOSButtonState();
+}
+
+class _GlowingSOSButtonState extends State<_GlowingSOSButton> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 1))..repeat(reverse: true);
+    _animation = Tween<double>(begin: 2.0, end: 15.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.red.shade50,
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: Colors.redAccent.withOpacity(0.5), width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.redAccent.withOpacity(0.3),
+                blurRadius: _animation.value,
+                spreadRadius: _animation.value / 2,
+              )
+            ],
+          ),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  icon: const Icon(Icons.more_horiz, color: Colors.redAccent),
+                  onPressed: () => widget.onSetContact(context, widget.docId, widget.emergencyPhone),
+                ),
+              ),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(25), bottomRight: Radius.circular(25)),
+                  onLongPress: () async {
+                    if (widget.emergencyPhone == null || widget.emergencyPhone!.isEmpty) {
+                      widget.onSetContact(context, widget.docId, null);
+                    } else {
+                      await SOSService().triggerSOS(widget.midwife, widget.emergencyPhone);
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("හදිසි පණිවිඩය සහ ඇමතුම යොමු කළා!"), backgroundColor: Colors.red),
+                        );
+                      }
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    child: Column(
+                      children: [
+                        const Icon(Icons.emergency_share, color: Colors.red, size: 45),
+                        const SizedBox(height: 10),
+                        const Text("EMERGENCY SOS", style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold)),
+                        Text(
+                          widget.emergencyPhone == null ? "තිත් 3 ඔබා හදිසි අංකයක් එක් කරන්න" : "Call: ${widget.emergencyPhone}",
+                          style: const TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

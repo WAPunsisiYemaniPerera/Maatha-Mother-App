@@ -7,53 +7,32 @@ class SOSService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final String? _uid = FirebaseAuth.instance.currentUser?.uid;
 
-  Future<void> triggerSOS(String midwifeName, String? emergencyContact) async {
+  Future<void> triggerSOS(String midwifeName, String? emergencyPhone) async {
     if (_uid == null) return;
 
     try {
-      // 1. Location අවසර පරීක්ෂා කිරීම
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        throw 'Location services are disabled.';
-      }
-
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          throw 'Location permissions are denied';
-        }
-      }
-      
-      if (permission == LocationPermission.deniedForever) {
-        throw 'Location permissions are permanently denied';
-      }
-
-      // 2. ස්ථානය ලබා ගැනීම
+      // 1. පද්ධතියට Alert එක යැවීම (Midwife හට පෙනෙන ලෙස)
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
 
-      // 3. දත්ත පද්ධතියට (Firestore) එක් කිරීම
       await _db.collection('emergencies').add({
         'motherId': _uid,
         'midwifeName': midwifeName,
         'location': GeoPoint(position.latitude, position.longitude),
         'timestamp': FieldValue.serverTimestamp(),
-        'status': 'Pending',
+        'status': 'Pending', 
       });
 
-      // 4. ඇමතුම ලබා ගැනීම
-      if (emergencyContact != null && emergencyContact.isNotEmpty) {
-        final Uri launchUri = Uri(scheme: 'tel', path: emergencyContact);
+      // 2. අදාළ දුරකථන අංකයට ස්වයංක්‍රීයව ඇමතුම ලබා ගැනීම
+      if (emergencyPhone != null && emergencyPhone.isNotEmpty) {
+        final Uri launchUri = Uri(scheme: 'tel', path: emergencyPhone);
         if (await canLaunchUrl(launchUri)) {
           await launchUrl(launchUri);
         }
       }
     } catch (e) {
-      print("SOS Error: $e");
-      // දෝෂය නැවත එවීමෙන් HomeScreen එකට එය පෙන්විය හැක
-      rethrow; 
+      rethrow;
     }
   }
 }
