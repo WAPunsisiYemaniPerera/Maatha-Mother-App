@@ -10,7 +10,6 @@ class ClinicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
     
-    // NIC එක ලබා ගැනීම සහ දෙපස ඇති අනවශ්‍ය ඉඩ (Spaces) ඉවත් කිරීම
     String? currentNic = user?.email?.split('@').first.trim();
 
     return MathaBackground(
@@ -26,7 +25,7 @@ class ClinicScreen extends StatelessWidget {
           centerTitle: true,
         ),
         body: StreamBuilder<QuerySnapshot>(
-          // *** Collection එකේ නම නිවැරදි කළා: 'clinic_reports' ***
+         
           stream: FirebaseFirestore.instance
               .collection('clinic_reports') 
               .where('motherNIC', isEqualTo: currentNic)
@@ -34,7 +33,7 @@ class ClinicScreen extends StatelessWidget {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              // දෝෂයක් ආවොත් එය පෙන්වීමට (Index Link එක මෙතැන පෙනේවි)
+              
               return Center(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -93,7 +92,7 @@ class ClinicScreen extends StatelessWidget {
   }
 
   Widget _buildClinicCard(BuildContext context, Map<String, dynamic> data) {
-    // දින ලබා ගැනීම
+    
     DateTime visitDate = DateTime.now();
     if (data['visitDate'] != null) {
       visitDate = (data['visitDate'] as Timestamp).toDate();

@@ -41,9 +41,9 @@ class _MathaBackgroundState extends State<MathaBackground> with SingleTickerProv
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFFFFF0F3), // මෘදු රෝස
-                  Color(0xFFF8F0FF), // මෘදු ලැවෙන්ඩර්
-                  Color(0xFFEDF7FF), // මෘදු නිල්
+                  Color(0xFFFFF0F3), 
+                  Color(0xFFF8F0FF), 
+                  Color(0xFFEDF7FF), 
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -51,7 +51,7 @@ class _MathaBackgroundState extends State<MathaBackground> with SingleTickerProv
             ),
           ),
 
-          // 2. පසුබිමේ ඇති මෘදු Glowing Orbs (සන්සුන් බව සඳහා)
+          
           Positioned(
             top: -100,
             right: -50,
@@ -63,13 +63,13 @@ class _MathaBackgroundState extends State<MathaBackground> with SingleTickerProv
             child: _buildGlowingOrb(300, const Color(0xFFBBDEFB).withOpacity(0.3)),
           ),
 
-          // 3. ඇනිමේට් වන අයිකන (Floating & Rotating Icons)
+          
           AnimatedBuilder(
             animation: _controller,
             builder: (context, child) {
               return Stack(
                 children: [
-                  // මෙහි අයිකන වල ප්‍රමාණය (Size) සහ පිහිටීම ලස්සනට සකසා ඇත
+                  
                   _buildEnhancedIcon(Icons.child_care_rounded, 0.1, 0.15, 85, 0.5),
                   _buildEnhancedIcon(Icons.favorite_rounded, 0.8, 0.1, 70, -0.3),
                   _buildEnhancedIcon(Icons.auto_awesome_rounded, 0.05, 0.75, 55, 0.8),
@@ -83,14 +83,14 @@ class _MathaBackgroundState extends State<MathaBackground> with SingleTickerProv
             },
           ),
 
-          // 4. ඉදිරියෙන් දිස්වන Content එක
+          
           SafeArea(child: widget.child),
         ],
       ),
     );
   }
 
-  // පසුබිම් ආලෝක ගෝල සාදන Method එක
+  
   Widget _buildGlowingOrb(double size, Color color) {
     return Container(
       width: size,
@@ -108,9 +108,9 @@ class _MathaBackgroundState extends State<MathaBackground> with SingleTickerProv
     );
   }
 
-  // පාවෙන සහ කැරකෙන අයිකන සාදන Method එක (මෙය කලින් කේතයේ මගහැරී තිබුණි)
+  
   Widget _buildEnhancedIcon(IconData icon, double top, double left, double size, double initialRotation) {
-    // සිනිඳු චලනයන් සඳහා සූත්‍ර
+    
     double verticalShift = sin(_controller.value * 2 * pi) * 25;
     double horizontalShift = cos(_controller.value * 2 * pi) * 15;
     double rotation = initialRotation + (sin(_controller.value * 2 * pi) * 0.2);
@@ -121,7 +121,7 @@ class _MathaBackgroundState extends State<MathaBackground> with SingleTickerProv
       child: Transform.rotate(
         angle: rotation,
         child: Opacity(
-          opacity: 0.12, // ඉතාමත් මෘදු ලෙස දිස්වීමට
+          opacity: 0.12, 
           child: Icon(
             icon,
             size: size,

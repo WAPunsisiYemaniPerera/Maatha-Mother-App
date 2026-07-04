@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
           DateTime lmpDate = (d['lmp'] as Timestamp).toDate();
           DateTime eddDate = (d['edd'] as Timestamp).toDate();
           
-          // සායන දිනය ලබා ගැනීම
+          
           DateTime? nextClinic = d['nextClinicDate'] != null 
               ? (d['nextClinicDate'] as Timestamp).toDate() 
               : null;
@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 _buildHeader(fullName, profilePic),
                 
-                // --- සායන මතක් කිරීමේ Card එක මෙතැනට එක් කර ඇත ---
+                
                 if (nextClinic != null) _buildClinicReminder(nextClinic),
                 
                 _GlowingSOSButton(
@@ -108,7 +108,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // --- සායන මතක් කිරීමේ Card එක ---
+  
   Widget _buildClinicReminder(DateTime nextClinicDate) {
     final now = DateTime.now();
     final difference = nextClinicDate.difference(now).inDays;

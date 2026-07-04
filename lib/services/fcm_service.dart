@@ -4,7 +4,7 @@ class FCMService {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
   Future<void> initNotifications() async {
-    // 1. අවසර ඉල්ලීම
+    
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -17,10 +17,10 @@ class FCMService {
 
     print('User granted permission: ${settings.authorizationStatus}');
 
-    // 2. Token එක ලබා ගැනීම
+    // get the device token for push notifications
     String? token = await _messaging.getToken();
     
-    // මෙය ඉතා වැදගත්! මෙම Token එක Copy කර තබා ගන්න.
+    // copy the token to clipboard or send it to your server for testing
     print("========= DEVICE TOKEN =========");
     print(token);
     print("================================");

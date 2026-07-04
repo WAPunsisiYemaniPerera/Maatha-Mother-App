@@ -8,10 +8,10 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // ඇප් එකේ ඇති රහස් අකුරු පෙළ (Registration වලදී භාවිතා කළ එකම විය යුතුය)
+ 
   static const String _pepper = "Maatha#Secret#2026";
 
-  // මුරපදය Hash කිරීමේ function එක
+  //hashing function that combines password, salt, and pepper
   String _hashPassword(String password, String salt) {
     final bytes = utf8.encode(password + salt + _pepper);
     return sha256.convert(bytes).toString();
@@ -19,7 +19,7 @@ class AuthService {
 
   Future<User?> signIn(String nic, String password) async {
     try {
-      // 1. Firestore එකෙන් මවගේ Salt එක සොයා ගැනීම (NIC එක මඟින්)
+      // first, fetch the user document based on NIC to get the salt
       var snapshot = await _db
           .collection('mothers')
           .where('nic', isEqualTo: nic.trim())
@@ -31,16 +31,16 @@ class AuthService {
         return null;
       }
 
-      // 2. දත්ත පද්ධතියෙන් Salt එක ලබා ගැනීම
+      // get the salt from the user document
       String salt = snapshot.docs.first.get('salt');
 
-      // 3. එම Salt සහ Pepper යොදාගෙන ලබාදුන් මුරපදය Hash කිරීම
+      // hash the input password with the retrieved salt and pepper
       String hashedInputPassword = _hashPassword(password.trim(), salt);
 
       // 4. Email Masking
       String maskedEmail = "${nic.trim().toLowerCase()}@maatha.lk";
 
-      // 5. Firebase Auth හරහා Hash එක මුරපදය ලෙස යොදා ලොග් වීම
+      // login with Firebase Auth using the masked email and hashed password
       UserCredential result = await _auth.signInWithEmailAndPassword(
         email: maskedEmail,
         password: hashedInputPassword,

@@ -24,12 +24,12 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    // තිරයේ ප්‍රමාණය අනුව උස සහ පෑඩිං තීරණය කිරීම
+    
     final mediaQuery = MediaQuery.of(context);
     final bottomPadding = mediaQuery.padding.bottom;
 
     return Scaffold(
-      extendBody: true, // Navigation එක පසුබිම මත පාවීමට ඉඩ ලබාදේ
+      extendBody: true, 
       body: MathaBackground(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 300),
@@ -42,7 +42,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
   Widget _buildPremiumNavBar(double bottomPadding) {
     return Container(
-      // පතුලේ ඇති safe area එක සමඟ උස සකස් කිරීම
+      
       margin: EdgeInsets.only(bottom: bottomPadding > 0 ? 0 : 0),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.98),
@@ -95,7 +95,7 @@ class _MainNavigationState extends State<MainNavigation> {
               curve: Curves.easeOutBack,
               padding: EdgeInsets.all(isSelected ? 10 : 8),
               decoration: BoxDecoration(
-                // Shadow Error එක වළක්වා ගැනීමට ස්ථාවර Shadow එකක් සහ වර්ණය පමණක් වෙනස් කිරීම
+          
                 color: isSelected ? primaryColor.withOpacity(0.12) : Colors.transparent,
                 shape: BoxShape.circle,
               ),

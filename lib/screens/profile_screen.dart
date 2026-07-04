@@ -13,7 +13,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  // Default පින්තූරය
+  
   String selectedAvatar = 'assets/avatars/avatar1.png';
 
   void _showEditDialog(String fieldName, String currentValue, String docId, String label) {
@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             var doc = snapshot.data!.docs.first;
             var userData = doc.data() as Map<String, dynamic>;
             
-            // Database එකේ පින්තූරයක් තිබේ නම් එය ලබා ගැනීම
+            
             String currentProfilePic = userData['profilePic'] ?? selectedAvatar;
 
             return LayoutBuilder(

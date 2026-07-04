@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import '../services/auth_service.dart';
-import '../widgets/matha_background.dart'; // පසුබිම් විජට් එක import කරන්න
+import '../widgets/matha_background.dart'; 
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // පාවෙන අයිකන සහිත පසුබිම භාවිතා කිරීම
+
       body: MathaBackground(
         child: FadeTransition(
           opacity: _fadeInAnimation,

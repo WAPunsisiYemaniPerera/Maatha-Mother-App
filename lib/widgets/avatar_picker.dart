@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AvatarPicker extends StatelessWidget {
-  // දැන් මෙතැනින් return කරන්නේ image path එකක් නිසා Function(String) ලෙස වෙනස් කර ඇත
+  
   final Function(String) onAvatarSelected;
 
   const AvatarPicker({super.key, required this.onAvatarSelected});
 
   @override
   Widget build(BuildContext context) {
-    // ඔබ සතු පින්තූර වල paths මෙහි ලැයිස්තුගත කරන්න
+    
     final List<String> avatars = [
       'assets/avatars/avatar1.png',
       'assets/avatars/avatar2.png',

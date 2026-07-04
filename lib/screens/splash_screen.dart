@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'main_wrapper.dart'; 
-import '../widgets/matha_background.dart'; // පසුබිම් විජට් එක import කරන්න
+import '../widgets/matha_background.dart'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -58,7 +58,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // පාවෙන අයිකන සහිත පසුබිම භාවිතා කිරීම
       body: MathaBackground(
         child: Stack(
           children: [

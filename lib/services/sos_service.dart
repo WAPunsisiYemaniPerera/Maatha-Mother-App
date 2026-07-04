@@ -11,7 +11,7 @@ class SOSService {
     if (_uid == null) return;
 
     try {
-      // 1. පද්ධතියට Alert එක යැවීම (Midwife හට පෙනෙන ලෙස)
+      
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
@@ -24,7 +24,7 @@ class SOSService {
         'status': 'Pending', 
       });
 
-      // 2. අදාළ දුරකථන අංකයට ස්වයංක්‍රීයව ඇමතුම ලබා ගැනීම
+      
       if (emergencyPhone != null && emergencyPhone.isNotEmpty) {
         final Uri launchUri = Uri(scheme: 'tel', path: emergencyPhone);
         if (await canLaunchUrl(launchUri)) {

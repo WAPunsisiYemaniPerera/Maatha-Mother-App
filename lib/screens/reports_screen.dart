@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart'; // දින වකවානු පෙන්වීමට
+import 'package:intl/intl.dart'; 
 import '../widgets/matha_background.dart';
 import '../services/report_service.dart';
 

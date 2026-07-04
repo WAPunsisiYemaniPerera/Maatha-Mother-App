@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../widgets/matha_background.dart'; // අපේ පසුබිම
+import '../widgets/matha_background.dart'; 
 import 'login_screen.dart';
 import 'main_navigation.dart';
 
@@ -14,7 +14,7 @@ class MainWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
-            // බලා සිටින විට පවා ලස්සන පසුබිමක් පෙන්වීමට
+            
             body: MathaBackground(
               child: Center(
                 child: CircularProgressIndicator(
